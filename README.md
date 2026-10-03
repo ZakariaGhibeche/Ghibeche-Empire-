@@ -29,3 +29,8 @@ Run the `empire_logger.py` script to start documenting your path:
 
 ```python
 python empire_logger.py
+---
+### 🌍 Empire Global Traffic
+<p align="center">
+  <img src="https://komarev.com/ghpvc/?username=ZakariaGhibeche&repo=Ghibeche-Empire-&color=blueviolet&style=flat-square" alt="Ghibeche-Empire Visitors" />
+</p>
