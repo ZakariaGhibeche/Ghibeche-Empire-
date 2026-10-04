@@ -1,0 +1,27 @@
+name: Ghibeche-Empire CI/CD & Integrity Audit
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  empire-security-audit:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Empire Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Run Ghibeche-Empire Integrity Shield
+      run: |
+        echo "========================================================="
+        echo "      🛡️ RUNNING AUTOMATED EMPIRE SECURITY AUDIT 🛡️      "
+        echo "========================================================="
+        python3 empire_shield.py
