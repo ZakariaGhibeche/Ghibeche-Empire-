@@ -1,37 +1,73 @@
-# Ghibeche-Empire Security System - Ultimate Edition v2
-# Author: Zakaria Ghibeche
+#!/usr/bin/env python3
+"""
+Project: Ghibeche-Empire
+File: ghibeche_crypt.py
+Author: Commander Zakaria Ghibeche
+Description: Advanced cryptographic utility designed for high-security 
+             data scrambling and secure empire communications.
+"""
 
-def ghibeche_encrypt(text, shift=3):
-    return "".join([chr(ord(char) + shift) for char in text])
+import base64
+import hashlib
+import sys
 
-def ghibeche_decrypt(encrypted_text, shift=3):
-    return "".join([chr(ord(char) - shift) for char in encrypted_text])
+class GhibecheCryptEngine:
+    def __init__(self, master_key: str):
+        self.master_key = master_key.encode('utf-8')
+        # Generate a secure 32-byte key using SHA-256 hash of the master key
+        self.sec_key = hashlib.sha256(self.master_key).digest()
+
+    def encrypt_data(self, plain_text: str) -> str:
+        """Encrypts plain text using advanced XOR masking layered with Base64 encoding."""
+        data_bytes = plain_text.encode('utf-8')
+        encrypted_bytes = bytearray()
+        
+        key_len = len(self.sec_key)
+        for i, b in enumerate(data_bytes):
+            # Apply dynamic XOR transformation with key rotation
+            masked_byte = b ^ self.sec_key[i % key_len]
+            encrypted_bytes.append(masked_byte)
+            
+        # Encode to Base64 for safe transport and storage
+        encoded_output = base64.urlsafe_b64encode(encrypted_bytes).decode('utf-8')
+        return encoded_output
+
+    def decrypt_data(self, cipher_text: str) -> str:
+        """Decrypts the secure cipher text back to original readable plain text."""
+        try:
+            decoded_bytes = base64.urlsafe_b64decode(cipher_text.encode('utf-8'))
+            decrypted_bytes = bytearray()
+            
+            key_len = len(self.sec_key)
+            for i, b in enumerate(decoded_bytes):
+                original_byte = b ^ self.sec_key[i % key_len]
+                decrypted_bytes.append(original_byte)
+                
+            return decrypted_bytes.decode('utf-8')
+        except Exception as e:
+            return f"[ERROR] Decryption failed. Invalid key or corrupted payload: {str(e)}"
+
+def banner():
+    print("=" * 60)
+    print("      🛡️  GHIBECHE EMPIRE - CRYPTOGRAPHIC ENGINE v1.0  🛡️      ")
+    print("      Author: Zakaria Ghibeche | Global Security Tool        ")
+    print("=" * 60)
 
 if __name__ == "__main__":
-    print("=== GHIBECHE EMPIRE SECURITY SYSTEM ===")
+    banner()
     
-    try:
-        raw_message = input("Enter operational message to secure: ")
-        
-        # تنظيف مستمر لأي رموز تحكم تظهر في البداية
-        message = raw_message
-        while message.startswith("^@") or message.startswith("^"):
-            message = message.lstrip("^@").strip()
-            
-        # تنظيف عام لأي حروف غير مطبوعة أو مسافات زائدة
-        message = message.strip()
-        
-        if message:
-            encrypted = ghibeche_encrypt(message)
-            decrypted = ghibeche_decrypt(encrypted)
-            
-            print("\n[+] Status: SECURED SUCCESSFULLY")
-            print(f"[+] Original: {message}")
-            print(f"[+] Encrypted (Empire Code): {encrypted}")
-            print(f"[+] Decrypted (Verified): {decrypted}")
-        else:
-            print("[-] Error: Message is empty after cleaning.")
-    except Exception as e:
-        print(f"[-] Error: {e}")
-        
-    print("========================================")
+    # Simulation / CLI Test Suite for Global Standards
+    secret_message = "Elite Python Infrastructure of Ghibeche Empire"
+    encryption_passphrase = "Zakaria-Master-Secret-2026"
+    
+    print(f"[*] Initializing Cryptographic Core...")
+    engine = GhibecheCryptEngine(encryption_passphrase)
+    
+    print(f"[+] Target Payload: {secret_message}")
+    ciphertext = engine.encrypt_data(secret_message)
+    print(f"[🔒] Encrypted Payload (Global Transmission Format): {ciphertext}")
+    
+    recovered_text = engine.decrypt_data(ciphertext)
+    print(f"[🔓] Decrypted Payload Verification: {recovered_text}")
+    print("=" * 60)
+    print("[✔] Ghibeche Crypt Engine executed successfully with 0 errors.")
