@@ -5,6 +5,7 @@
 ![Platform: Pydroid 3](https://img.shields.io/badge/Platform-Android%20%2F%20Pydroid%203-orange.svg)
 ![Architecture: Zero-Dependency](https://img.shields.io/badge/Architecture-Zero--Dependency-success.svg)
 ![Global Ecosystem](https://img.shields.io/badge/Ecosystem-Apex--Empire-purple.svg)
+![Apex-Empire CI Check](https://github.com/ZakariaGhibeche/Ghibeche-Empire-/actions/workflows/python-check.yml/badge.svg)
 
 # 🛡️ Apex-Empire | Mobile-Optimized Security Suite
 
