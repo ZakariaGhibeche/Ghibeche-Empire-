@@ -1,26 +1,40 @@
-<div align="center">
+# 🛡️ Apex-Sentinel | Zero-Dependency Security Scanner
 
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-![Python Version](https://img.shields.io/badge/Python-3.x-blue.svg)
-![Platform: Pydroid 3](https://img.shields.io/badge/Platform-Android%20%2F%20Pydroid%203-orange.svg)
-![Architecture: Zero-Dependency](https://img.shields.io/badge/Architecture-Zero--Dependency-success.svg)
-![Global Ecosystem](https://img.shields.io/badge/Ecosystem-Apex--Empire-purple.svg)
-![Apex-Empire CI Check](https://github.com/ZakariaGhibeche/Ghibeche-Empire-/actions/workflows/python-check.yml/badge.svg)
+[![Python 3.x](https://img.shields.io/badge/python-3.x-blue.svg)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Architecture](https://img.shields.io/badge/Architecture-Zero--Dependency-success.svg)](#)
 
-# 🛡️ Apex-Empire | Mobile-Optimized Security Suite
+**Apex-Sentinel** is a lightweight, zero-dependency Python security auditor designed to detect hardcoded secrets, sensitive credentials, private keys, and suspicious IP addresses/IoCs in source code repositories.
 
-A Zero-Dependency, Mobile-Optimized Modular Cybersecurity & Data Intelligence Ecosystem.
+Built specifically for high-efficiency environments, CI/CD security pipelines, and mobile testing environments (Pydroid 3 / Termux).
 
 ---
-</div>
 
-## 🚀 Overview
-**Apex-Empire** is a professional, modular cybersecurity suite engineered natively for mobile environments (Pydroid 3) while matching global open-source standards.
+## ✨ Features
 
-* **Apex-Core (`empire_main.py`):** Unified interactive CLI dashboard.
-* **Apex-Crypt (`apex_crypt.py`):** Advanced payload encryption & compression.
-* **Apex-NetTunnel (`apex_nettunnel.py`):** Secure decentralized communication nodes.
-* **Apex-DataMatrix (`apex_datamatrix.py`):** Automated regex sensitive data extraction.
+- 🚀 **Zero Dependencies**: Runs instantly on standard Python 3.x without `pip install`.
+- 🔐 **Secret Leak Detection**: Identifies leaked GitHub Tokens, AWS Keys, Private Keys, and API credentials.
+- 🌐 **Network IoC Scanner**: Flags exposed IP addresses and internal configuration endpoints.
+- 📱 **Cross-Platform**: Seamless execution on Linux, Android (Pydroid 3/Termux), macOS, and Windows.
+- 📊 **Clean Audit Logs**: Outputs structured, clear security assessment reports.
 
 ---
-*Engineered by Commander Zakaria Ghibeche (Djelfa, Algeria)*
+
+## ⚡ Quick Start
+
+### Run locally or in Termux / Pydroid 3:
+
+```bash
+# Scan current directory
+python apex_sentinel.py
+
+# Scan a specific project path
+python apex_sentinel.py /path/to/target_project
+==================================================
+ 🛡️ APEX-SENTINEL SECURITY AUDIT REPORT 🛡️ 
+==================================================
+
+📁 File: ./empire_main.py
+   ⚠️  [Line 95] Found IP Address: `sample_logs = "INFO: Auth success from 192.168.1.100"`
+📁 File: ./apex_sentinel.py
+   ⚠️  [Line 16] Found Private Key: `"Private Key": r"-----BEGIN PRIVATE KEY-----"`
